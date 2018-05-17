@@ -6,4 +6,5 @@ import com.taotao.pojo.TbItem;
 
 public interface ItemService {
 	TbItem getItemByid(long id);
+	
 }
