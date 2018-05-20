@@ -14,5 +14,5 @@ import com.taotao.pojo.TbItem;
  */
 public interface ItemService {
 	TbItem getItemByid(long id);
-	TaotaoResult createItem(TbItem tbItem, String desc) throws Exception;
+	TaotaoResult createItem(TbItem tbItem, String desc, String itemParam) throws Exception;
 }
