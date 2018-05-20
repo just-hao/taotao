@@ -1,16 +1,21 @@
-package com.taotao.service;
+package com.taotao.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.taotao.common.pojo.EUTreeNode;
+import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.IDUtils;
 import com.taotao.mapper.TbItemCatMapper;
+import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemCatExample;
 import com.taotao.pojo.TbItemCatExample.Criteria;
+import com.taotao.service.ItemCatService;
 
 /**
  * 商品分类管理
@@ -43,5 +48,4 @@ public class ItemCatServiceImpl implements ItemCatService {
 		}
 		return resultList;
 	}
-
 }

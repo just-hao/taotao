@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 import com.taotao.service.ItemService;
 
@@ -30,4 +31,13 @@ public class ItemController {
 		TbItem item = itemService.getItemByid(itemId);
 		return item;
 	}
+	
+	@RequestMapping(value="/item/save",method=RequestMethod.POST)
+	@ResponseBody
+	public TaotaoResult createItem(TbItem tbItem,String desc) throws Exception{
+		TaotaoResult result = itemService.createItem(tbItem, desc);
+		return result;
+	}
+	
+	
 }
