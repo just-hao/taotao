@@ -93,6 +93,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.taotao.pojo.TbContentCategory">
+  	<selectKey keyProperty="id" resultType="long" order="AFTER">
+  		select last_insert_id()
+  	</selectKey>
     insert into tb_content_category (id, parent_id, name, 
       status, sort_order, is_parent, 
       created, updated)
@@ -101,6 +104,9 @@
       #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.taotao.pojo.TbContentCategory">
+    <selectKey keyProperty="id" resultType="long" order="AFTER">
+  		select last_insert_id()
+  	</selectKey>
     insert into tb_content_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -207,4 +213,27 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from tb_content_category
+  	where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <update id="updatebyPrimaryKey" parameterType="com.taotao.pojo.TbContentCategory">
+  	update tb_content_category
+      set parent_id = #{parentId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      sort_order = #{sortOrder,jdbcType=INTEGER},
+      is_parent = #{isParent,jdbcType=BIT},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  	delete from tb_content_category where id = #{id,jdbcType=BIGINT} 
+  </delete>
 </mapper>

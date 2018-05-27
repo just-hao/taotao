@@ -1,9 +1,11 @@
 package com.taotao.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.taotao.pojo.TbContentCategory;
 import com.taotao.pojo.TbContentCategoryExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TbContentCategoryMapper {
     long countByExample(TbContentCategoryExample example);
@@ -19,4 +21,10 @@ public interface TbContentCategoryMapper {
     int updateByExampleSelective(@Param("record") TbContentCategory record, @Param("example") TbContentCategoryExample example);
 
     int updateByExample(@Param("record") TbContentCategory record, @Param("example") TbContentCategoryExample example);
+    
+    TbContentCategory selectByPrimaryKey(Long id);
+    
+    void updateByPrimaryKey(TbContentCategory parentCat);
+    
+    void deleteByPrimaryKey(Long id);
 }
