@@ -24,8 +24,6 @@ import com.taotao.portal.service.ContentService;
 @Service
 public class ContentServiceImpl implements ContentService {
 
-	private static final Class<?> TbContent = null;
-
 	@Value("${REST_BASE_URL}")
 	private String REST_BASE_URL;
 	
