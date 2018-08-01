@@ -1,12 +1,19 @@
 package com.hadoop.mapreduces;
 
+import static org.mockito.Matchers.anyByte;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
+
+import sun.nio.ch.IOUtil;
 
 /**
  * @author wang
@@ -16,8 +23,32 @@ public class HdfsApp {
 	
 	public static void main(String[] args) throws IOException {
 		
-		String fileName = "/user/beifeng/mapreduce/wordcount/input/wc.input";
-		read(fileName);
+//		String fileName = "/user/beifeng/mapreduce/wordcount/input/wc.input";
+//		read(fileName);
+		FileSystem fileSystem = getFileSystem();
+		
+		//write path
+		String putFileName = "/user/hadoop/put-wc.input";
+		Path writePath = new Path(putFileName);
+		FSDataOutputStream outputStream = fileSystem.create(writePath);
+		
+		//file input Stream
+		FileInputStream inStream = new FileInputStream(//
+				new File(
+						"/home/hadoop/hadoop-2.9.1/wc.input")//
+		);
+		
+		//stream read/write
+		try {
+			//read
+			IOUtils.copyBytes(inStream, outputStream, 4096, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			//close Steam
+			IOUtils.closeStream(inStream);
+			IOUtils.closeStream(outputStream);
+		}
 	}
 
 	/**
